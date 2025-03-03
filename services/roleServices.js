@@ -22,9 +22,14 @@ async function updateRole(role_id, body) {
     return await Roles.findByIdAndUpdate(role_id, body);
 }
 
+async function deleteRole(role_id) {
+    return await Roles.findByIdAndDelete(role_id);
+}
+
 
 module.exports = {
     getAllRoles,
     createRole,
-    updateRole
+    updateRole,
+    deleteRole
 }
