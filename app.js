@@ -24,9 +24,9 @@ app.use(cookieParser());
 
 
 app.use('/auditlog', require('./routes/auditlogRoutes'));
-app.use('/users', require('./routes/userRoutes'));
 app.use('/categories', require('./routes/categoryRoutes'));
-app.use('/roles', require('./routes/roleRoutes'));
+// app.use('/users', require('./routes/userRoutes'));
+// app.use('/roles', require('./routes/roleRoutes'));
 
 
 
