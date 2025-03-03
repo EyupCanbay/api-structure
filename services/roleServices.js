@@ -10,8 +10,12 @@ async function getAllRoles() {
     }
     else {
         return await Roles.find();
-    }
-    
+    } 
+}
+
+async function createRole(role) {
+    const newRole = new Roles(role);
+    return await newRole.save();
 }
 
 
@@ -19,4 +23,5 @@ async function getAllRoles() {
 
 module.exports = {
     getAllRoles,
+    createRole,
 }

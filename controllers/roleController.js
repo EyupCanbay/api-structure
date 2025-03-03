@@ -16,6 +16,25 @@ async function getAllRoles(req,res,next){
     }
 }
 
+async function createRole(req,res,next) {
+    const role = req.body;
+    if((role.role_name === "") && (role.is_active === false)) {
+        new CustomError(Enum.HTTP_CODES.BAD_REQUEST, 'Bad Request', 'Role name and is_active cannot be empty');
+    } else {
+        try {
+            const newRole = await roleServices.createRole(role);
+            res.status(201).json(ResponseHandler.success('Role created successfully', newRole));
+        
+        } catch (error) {
+            res.status(500).json(ResponseHandler.error('An error occurred', error));
+        }
+
+    }
+
+}
+
+
 module.exports = {
     getAllRoles,
+    createRole,
 }
