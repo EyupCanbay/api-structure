@@ -1,4 +1,4 @@
-const Category = require('../models/categories');
+
 const categoryService = require('../services/categoryService');
 const ResponseHandler = require('../lib/responseHandler.js');
 const CustomError = require('../lib/customError.js');
@@ -31,7 +31,7 @@ async function updateCategory(req,res,next){
     const category_id = req.params.category_id;
     if(!category_id) throw new CustomError(Enum.HTTP_CODES.NOT_FOUND, 'Not Found', 'Category not found');
     const body = req.body;
-    if(!body.name) throw new CustomError(Enum.HTTP_CODES.BAD_REQUEST, 'Validation error', 'id is field must be field');
+    if(!body.name) throw new CustomError(Enum.HTTP_CODES.BAD_REQUEST, 'Validation error', 'Name is field must be field');
     
     try{
         const category = await categoryService.updateCategory(category_id, body);
