@@ -32,10 +32,20 @@ async function updateCategory(category_id, body) {
         res.status(500).json(ResponseHandler.error('An error occurred', error));
     }
 }
+
+async function deleteCategory(category_id) {
+    try{
+        return await Category.findByIdAndDelete({_id: category_id});
+    } catch (error) {
+        res.status(500).json(ResponseHandler.error('An error occurred', error));
+    }
+}
+
 module.exports = {
     getAllCategories,
     createCategory,
-    updateCategory
+    updateCategory,
+    deleteCategory
 }
 
 

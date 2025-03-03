@@ -8,7 +8,7 @@ const Enum = require('../config/Enum.js');
 
 async function getAllCategories(req,res,next){
     try{    
-        
+
         let categories = await categoryService.getAllCategories();
         res.status(200).json(ResponseHandler.success('Categories retrieved successfully', categories));
     } catch (error) {
@@ -42,8 +42,21 @@ async function updateCategory(req,res,next){
 
 }
 
+async function deleteCategory(req,res,next){
+    const category_id = req.params.category_id;
+    if(!category_id) throw new CustomError(Enum.HTTP_CODES.NOT_FOUND, 'Not Found', 'Category not found');
+    try{
+        await categoryService.deleteCategory(category_id);
+        res.status(200).json(ResponseHandler.success('Category deleted successfully'));
+    } catch (error) {
+        res.status(500).json(ResponseHandler.error('An error occurred', error));
+    }
+}
+
+
 module.exports = {
     getAllCategories,
     createCategory,
-    updateCategory
+    updateCategory,
+    deleteCategory
 }
