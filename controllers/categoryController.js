@@ -12,6 +12,17 @@ async function getAllCategories(req,res,next){
     }
 } 
 
+async function createCategory(req,res,next){
+    const body = req.body;
+    try{
+        const category = await categoryService.createCategory(body);
+        res.status(201).json(ResponseHandler.success('Category created successfully', category)); 
+    } catch (error) {
+        res.status(500).json(ResponseHandler.error('An error occurred', error));
+    }
+}
+
 module.exports = {
-    getAllCategories
+    getAllCategories,
+    createCategory
 }

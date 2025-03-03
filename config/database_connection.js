@@ -14,7 +14,11 @@ class Database {
     async connect() {
         try {
             console.log("Connecting to database");
-            const db = await mongoose.connect(process.env.DB_URI);
+            const db = await mongoose.connect(process.env.DB_URI,
+                {
+                    dbName: "ytb",
+                }
+            );
             this.mongoConnection = db;
             console.log("Database connected");
         } catch (error) {
