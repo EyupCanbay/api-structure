@@ -1,6 +1,7 @@
 const Category = require('../models/categories');
 const CustomError = require('../lib/customError');
 const Enum = require('../config/Enum');
+const ResponseHandler = require('../lib/responseHandler.js')
 
 async function getAllCategories() {
     return await Category.find();
@@ -8,11 +9,8 @@ async function getAllCategories() {
 
 async function createCategory(body) {
     try{
-    if(!body.name) throw new CustomError(Enum.HTTP_CODES.BAD_REQUEST, 'Vadlidation error', 'Name is required');
     let category = new Category({
         name: body.name,
-        // is_active: true,
-        // created_by: req.user?.id
     });
     
     await category.save();
@@ -23,10 +21,21 @@ async function createCategory(body) {
     }
 }
 
+async function updateCategory(category_id, body) {
+    try{
+        let category = await Category.findById({_id: category_id})
+        category.name = body.name || category.name;
+        category.is_active = body.is_active || category.is_active;
+        return await Category.findByIdAndUpdate({_id: category_id}, category);
 
+    } catch (error) {
+        res.status(500).json(ResponseHandler.error('An error occurred', error));
+    }
+}
 module.exports = {
     getAllCategories,
-    createCategory
+    createCategory,
+    updateCategory
 }
 
 
