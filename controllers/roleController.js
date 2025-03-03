@@ -46,8 +46,19 @@ async function updateRole(req,res,next) {
     }
 }
 
+async function deleteRole(req,res,next) {
+    if(!req.params.id) return new CustomError(Enum.HTTP_CODES.BAD_REQUEST, 'Bad Request', 'Role ID is required');
+    try {
+        await roleServices.deleteRole(req.params.id);
+        res.status(200).json(ResponseHandler.success('Role deleted successfully'));
+    } catch (error) {
+        res.status(500).json(ResponseHandler.error('An error occurred', error));
+    }
+}
+
 module.exports = {
     getAllRoles,
     createRole,
-    updateRole
+    updateRole,
+    deleteRole
 }
