@@ -18,10 +18,13 @@ async function createRole(role) {
     return await newRole.save();
 }
 
-
+async function updateRole(role_id, body) {
+    return await Roles.findByIdAndUpdate(role_id, body);
+}
 
 
 module.exports = {
     getAllRoles,
     createRole,
+    updateRole
 }
