@@ -71,6 +71,7 @@ async function updateRole(role_id, body) {
 }
 
 async function deleteRole(role_id) {
+<<<<<<< HEAD
     const session = await mongoose.startSession();
     session.startTransaction();
 
@@ -91,11 +92,20 @@ async function deleteRole(role_id) {
 
 
 
+=======
+    return await Roles.findByIdAndDelete(role_id);
+}
+
+>>>>>>> 60f723da7e73ab07052d96c0f735798a1e95582a
 
 module.exports = {
     getAllRoles,
     createRole,
     updateRole,
+<<<<<<< HEAD
     deleteRole,
     
+=======
+    deleteRole
+>>>>>>> 60f723da7e73ab07052d96c0f735798a1e95582a
 }

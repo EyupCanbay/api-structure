@@ -53,7 +53,11 @@ async function updateRole(req,res,next) {
 }
 
 async function deleteRole(req,res,next) {
+<<<<<<< HEAD
     if(!req.params.id) throw new CustomError(Enum.HTTP_CODES.BAD_REQUEST, 'Bad Request', 'Role ID is required');
+=======
+    if(!req.params.id) return new CustomError(Enum.HTTP_CODES.BAD_REQUEST, 'Bad Request', 'Role ID is required');
+>>>>>>> 60f723da7e73ab07052d96c0f735798a1e95582a
     try {
         await roleServices.deleteRole(req.params.id);
         res.status(200).json(ResponseHandler.success('Role deleted successfully'));
@@ -62,6 +66,7 @@ async function deleteRole(req,res,next) {
     }
 }
 
+<<<<<<< HEAD
 async function get_role_privileges(req,res,next) {
     try {
         if(privileges.groups === "") throw new CustomError(Enum.HTTP_CODES.NOT_FOUND, 'Not Found', 'No groups found');
@@ -72,10 +77,16 @@ async function get_role_privileges(req,res,next) {
     }   
 }
 
+=======
+>>>>>>> 60f723da7e73ab07052d96c0f735798a1e95582a
 module.exports = {
     getAllRoles,
     createRole,
     updateRole,
+<<<<<<< HEAD
     deleteRole,
     get_role_privileges
+=======
+    deleteRole
+>>>>>>> 60f723da7e73ab07052d96c0f735798a1e95582a
 }
